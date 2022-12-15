@@ -1,0 +1,26 @@
+{
+  "alert": {
+    "close": "",
+    "title": ""
+  },
+  "back": "",
+  "card_lock": "",
+  "close_modal": "",
+  "confirmation_dialog": {
+    "close": "",
+    "confirm": ""
+  },
+  "default_site_name": "OTT Uygulamam",
+  "filter_videos_by": "OTT AppFilter videolarım {{ name }}lisansa göre",
+  "home": "Ev",
+  "live": "CANLI",
+  "now": "Şimdi",
+  "optional": "",
+  "play_item": "",
+  "series": "diziler",
+  "sign_in": "Kayıt olmak",
+  "sign_up": "Üye olmak",
+  "slide_left": "Sola kaydır",
+  "slide_right": "Sağa kaydır",
+  "filter_videos_by_genre": ""
+}
