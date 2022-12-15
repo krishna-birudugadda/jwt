@@ -17,7 +17,6 @@ import { getPublicUrl } from '#src/utils/domHelpers';
 import useBreakpoint, { Breakpoint } from '#src/hooks/useBreakpoint';
 import IconButton from '#components/IconButton/IconButton';
 import Dropdown from '../Dropdown/Dropdown';
-import { logDev } from '#src/utils/common';
 import { useEffect } from 'react';
 
 type TypeHeader = 'static' | 'fixed';

@@ -9,7 +9,6 @@ import type { Playlist } from '#types/playlist';
 import PlaylistGrid from '#src/pages/ScreenRouting/playlistScreens/PlaylistGrid/PlaylistGrid';
 import PlaylistLiveChannels from '#src/pages/ScreenRouting/playlistScreens/PlaylistLiveChannels/PlaylistLiveChannels';
 import { ScreenMap } from '#src/pages/ScreenRouting/ScreenMap';
-import { logDev } from '#src/utils/common';
 
 export const playlistScreenMap = new ScreenMap<Playlist>();
 

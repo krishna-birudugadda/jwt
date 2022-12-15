@@ -44,7 +44,6 @@ const MediaScreenRouter = () => {
   }
 
   const MediaScreen = mediaScreenMap.getScreen(data);
-  logDev('mediaScreen', data)
 
   return <MediaScreen data={data} isLoading={isFetching} />;
 };

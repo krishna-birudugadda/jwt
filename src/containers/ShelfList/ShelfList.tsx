@@ -19,7 +19,7 @@ import type { Content } from '#types/Config';
 import { useWatchHistoryStore } from '#src/stores/WatchHistoryStore';
 import { parseAspectRatio, parseTilesDelta } from '#src/utils/collection';
 import InfiniteScrollLoader from '#components/InfiniteScrollLoader/InfiniteScrollLoader';
-import { logDev, testId } from '#src/utils/common';
+import {  testId } from '#src/utils/common';
 
 const INITIAL_ROW_COUNT = 6;
 const LOAD_ROWS_COUNT = 4;

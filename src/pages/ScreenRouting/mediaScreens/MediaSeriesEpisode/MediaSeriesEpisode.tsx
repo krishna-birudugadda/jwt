@@ -31,7 +31,6 @@ import type { ScreenComponent } from '#types/screens';
 import useQueryParam from '#src/hooks/useQueryParam';
 import useGetSeriesId from '#src/hooks/useGetSeriesId';
 import Loading from '#src/pages/Loading/Loading';
-import { logDev } from '#src/utils/common';
 
 const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
   const breakpoint = useBreakpoint();
@@ -64,7 +63,6 @@ const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
 
   const episodeItem = useMemo(() => (series && data ? enrichMediaItems(series, [data])[0] : data), [data, series]);
   const nextItem = useMemo(() => getNextItem(episodeItem, series, seriesPlaylist), [episodeItem, series, seriesPlaylist]);
-  logDev('series', episodeItem.title, episodeItem.description, seriesPlaylist, episodeItem, i18n.language);
   const isLoading = seriesIdLoading || isPlaylistLoading;
 
   const [seasonFilter, setSeasonFilter] = useState<string>(episodeItem?.seasonNumber || '1');

@@ -12,7 +12,6 @@ import { isLocked } from '#src/utils/entitlements';
 import TileDock from '#components/TileDock/TileDock';
 import Card, { type PosterAspectRatio } from '#components/Card/Card';
 import type { Playlist, PlaylistItem } from '#types/playlist';
-import { logDev } from '#src/utils/common';
 
 export const tileBreakpoints: Breakpoints = {
   [Breakpoint.xs]: 1,
@@ -74,7 +73,6 @@ const Shelf = ({
 
   const renderTile = useCallback(
     (item: PlaylistItem, isInView: boolean) => {
-      logDev('items', item.title);
       return (
     
       <Card
