@@ -84,6 +84,25 @@ const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
   const goBack = () => episodeItem && seriesPlaylist && navigate(episodeURL(data, seriesId, false, feedId));
   const onCardClick = (toEpisode: PlaylistItem) => seriesPlaylist && navigate(episodeURL(toEpisode, seriesId, false, feedId));
 
+  const getDescription = () => {
+    if (currentLanguage === 'tr-TR') return episodeItem?.trDescription
+
+    return episodeItem.description;
+
+  }
+  const getTitle = () => {
+    if (currentLanguage === 'tr-TR') return episodeItem?.trTitle
+
+    return episodeItem.title;
+
+  }
+  const getSeriesTitle = () => {
+    if (currentLanguage === 'tr-TR') return seriesPlaylist?.trTitle
+
+    return seriesPlaylist.title;
+
+  }
+
   const handleComplete = useCallback(() => {
     if (nextItem) {
       navigate(episodeURL(nextItem, seriesId, true, feedId));
@@ -110,7 +129,7 @@ const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
   const primaryMetadata = formatVideoMetaString(episodeItem, t('video:total_episodes', { count: seriesPlaylist.playlist.length }));
   const secondaryMetadata = (
     <>
-      <strong>{formatSeriesMetaString(episodeItem.seasonNumber, episodeItem.episodeNumber)}</strong> - {episodeItem.title}
+      <strong>{formatSeriesMetaString(episodeItem.seasonNumber, episodeItem.episodeNumber)}</strong> - {getTitle()}
     </>
   );
   const episodesInSeason = seriesPlaylist.playlist.filter((i) => i.seasonNumber === episodeItem.seasonNumber).length;
@@ -136,24 +155,6 @@ const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
   const isLoggedIn = !!user;
   const hasSubscription = !!subscription;
 
-  const getDescription = () => {
-    if (currentLanguage === 'tr-TR') return episodeItem?.trDescription
-
-    return episodeItem.description;
-
-  }
-  const getTitle = () => {
-    if (currentLanguage === 'tr-TR') return episodeItem?.trTitle
-
-    return episodeItem.title;
-
-  }
-  const getSeriesTitle = () => {
-    if (currentLanguage === 'tr-TR') return seriesPlaylist?.trTitle
-
-    return seriesPlaylist.title;
-
-  }
 
   return (
     <React.Fragment>
@@ -199,7 +200,7 @@ const MediaSeriesEpisode: ScreenComponent<PlaylistItem> = ({ data }) => {
         isLoggedIn={isLoggedIn}
         hasSubscription={hasSubscription}
         playlist={filteredPlaylist}
-        relatedTitle={inlineLayout ? seriesPlaylist.title : t('episodes')}
+        relatedTitle={inlineLayout ? getSeriesTitle() : t('episodes')}
         onItemClick={onCardClick}
         enableCardTitles={styling.shelfTitles}
         setFilter={setSeasonFilter}

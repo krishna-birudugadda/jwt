@@ -36,6 +36,7 @@ const VideoDetails: React.VFC<Props> = ({
 }) => {
   const breakpoint: Breakpoint = useBreakpoint();
   const isMobile = breakpoint === Breakpoint.xs;
+  
 
   return (
     <div className={styles.video} data-testid={testId('video-details')}>
