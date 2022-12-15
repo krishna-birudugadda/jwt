@@ -29,8 +29,7 @@ import InlinePlayer from '#src/containers/InlinePlayer/InlinePlayer';
 import { logDev } from '#src/utils/common';
 
 const MediaMovie: ScreenComponent<PlaylistItem> = ({ data, isLoading }) => {
-  logDev('media', data.title, data.description);
-  const { t } = useTranslation('video');
+  const { t, i18n } = useTranslation('video');
 
   const [playTrailer, setPlayTrailer] = useState<boolean>(false);
   const breakpoint = useBreakpoint();
@@ -43,6 +42,7 @@ const MediaMovie: ScreenComponent<PlaylistItem> = ({ data, isLoading }) => {
   const play = useQueryParam('play') === '1';
   const feedId = useQueryParam('r');
 
+  const currentLanguage= i18n.language;
   // Config
   const { config, accessModel } = useConfigStore(({ config, accessModel }) => ({ config, accessModel }), shallow);
   const { siteName, styling, features, custom } = config;
@@ -79,6 +79,20 @@ const MediaMovie: ScreenComponent<PlaylistItem> = ({ data, isLoading }) => {
     (document.scrollingElement || document.body).scroll({ top: 0 });
   }, [id]);
 
+
+  const getTitle = () => {
+    if (currentLanguage === 'tr-TR') return data.trTitle
+
+    return data.title;
+
+  }
+
+  const getDescription =()=>{
+    if (currentLanguage === 'tr-TR') return data.description
+
+    return data.description;
+
+  }
   // UI
   const pageTitle = `${data.title} - ${siteName}`;
   const canonicalUrl = data ? `${window.location.origin}${mediaURL(data)}` : window.location.href;
@@ -136,8 +150,8 @@ const MediaMovie: ScreenComponent<PlaylistItem> = ({ data, isLoading }) => {
         accessModel={accessModel}
         isLoggedIn={isLoggedIn}
         hasSubscription={hasSubscription}
-        title={data.title}
-        description={data.description}
+        title={getTitle()}
+        description={getDescription()}
         image={data.backgroundImage}
         primaryMetadata={primaryMetadata}
         shareButton={shareButton}
@@ -166,7 +180,7 @@ const MediaMovie: ScreenComponent<PlaylistItem> = ({ data, isLoading }) => {
               open={play && isEntitled}
               onClose={goBack}
               item={data}
-              title={data.title}
+              title={getTitle()}
               primaryMetadata={primaryMetadata}
               onComplete={handleComplete}
               feedId={feedId ?? undefined}

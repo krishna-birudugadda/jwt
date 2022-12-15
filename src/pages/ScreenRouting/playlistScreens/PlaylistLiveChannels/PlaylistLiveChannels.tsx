@@ -50,6 +50,8 @@ const PlaylistLiveChannels: ScreenComponent<Playlist> = ({ data: { feedid, playl
   const liveFromBeginning = searchParams.get('beginning') === '1';
   const goBack = () => feedid && navigate(liveChannelsURL(feedid, channelId));
 
+  const {i18n}= useTranslation();
+  const currentLanguage = i18n.language;
   // EPG data
   const [initialChannelId] = useState(channelId);
   const { channels, channel, program, setActiveChannel } = useLiveChannels(playlist, initialChannelId, !liveFromBeginning);
@@ -58,7 +60,7 @@ const PlaylistLiveChannels: ScreenComponent<Playlist> = ({ data: { feedid, playl
   // Media item
   const channelMediaItem = useMemo(() => playlist.find(({ mediaid }) => channel?.id === mediaid), [channel?.id, playlist]);
   const { isEntitled } = useEntitlement(channelMediaItem);
-logDev('playList', program?.title, program?.description);
+logDev('playList', program.title, program.description);
   const videoDetails = useMemo(() => {
     if (program) {
       return {
@@ -130,6 +132,15 @@ logDev('playList', program?.title, program?.description);
     }
   }, [navigate, feedid, channel, channelId]);
 
+const getTitle=()=>{
+  if(currentLanguage === 'tr-TR') return videoDetails?.trTitle;
+  return videoDetails.title;
+}
+
+const getDescription=()=>{
+  if(currentLanguage === 'tr-TR') return videoDetails?.trDescription;
+  return videoDetails.description;
+}
   // Loading (channel and feedid must be defined)
   if (!channel || !feedid) {
     return <Loading />;
@@ -205,8 +216,8 @@ logDev('playList', program?.title, program?.description);
         isLoggedIn={true}
         hasSubscription={true}
         accessModel={accessModel}
-        title={videoDetails.title}
-        description={videoDetails.description}
+        title={getTitle()}
+        description={getDescription()}
         item={channelMediaItem}
         primaryMetadata={primaryMetadata}
         posterMode={posterFading ? 'fading' : 'normal'}
@@ -221,7 +232,7 @@ logDev('playList', program?.title, program?.description);
               open={play && isEntitled}
               onClose={goBack}
               item={channelMediaItem}
-              title={videoDetails.title}
+              title={getTitle()}
               primaryMetadata={primaryMetadata}
               feedId={feedid}
               liveStartDateTime={liveStartDateTime}
